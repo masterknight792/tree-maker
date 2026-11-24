@@ -1,0 +1,107 @@
+:root{
+  --bg:#0f1115; --panel:#171a21; --panel2:#1d212a; --border:#2a2f3a;
+  --text:#e6e8ee; --muted:#8a91a3; --accent:#4f8cff; --accent2:#3b6fd4;
+  --ok:#2ecc71; --danger:#e5484d; --warn:#f5a524;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Segoe UI",Tahoma,Arial,sans-serif;display:flex;flex-direction:column;overflow:hidden}
+
+/* ---------- الهيدر ---------- */
+header{padding:10px 20px;border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;background:var(--panel)}
+.brand{display:flex;align-items:center;gap:10px;justify-self:start}
+.brand-icon{font-size:24px}
+.brand h1{margin:0;font-size:18px;white-space:nowrap}
+.nav{display:flex;gap:6px;background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:4px;justify-self:center}
+.nav button{border:0;background:transparent;padding:8px 16px;border-radius:9px;color:var(--muted);font-size:14px;display:flex;align-items:center;gap:7px}
+.nav button:hover{color:var(--text);background:var(--panel2)}
+.nav button.active{background:var(--accent);color:#fff}
+.nav .badge{background:rgba(255,255,255,.14);border-radius:20px;padding:0 7px;font-size:12px;line-height:19px}
+.nav button.new{color:var(--ok)}
+.nav button.new:hover{background:rgba(46,204,113,.12);color:var(--ok)}
+.nav .sep{width:1px;background:var(--border);margin:4px 2px}
+.status{justify-self:end;font-size:13px;color:var(--muted);white-space:nowrap}
+.status.ok b{color:var(--ok)} .status.bad b{color:var(--danger)}
+@media(max-width:900px){
+  header{grid-template-columns:1fr;justify-items:center;padding:10px}
+  .brand,.status{justify-self:center}
+}
+
+/* ---------- عام ---------- */
+.view{flex:1;min-height:0;display:none}
+.view.show{display:grid}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:12px;display:flex;flex-direction:column;min-height:0;overflow:hidden}
+.card h2{margin:0;padding:12px 16px;font-size:15px;border-bottom:1px solid var(--border);background:var(--panel2)}
+.body{padding:14px 16px;display:flex;flex-direction:column;gap:10px;flex:1;min-height:0}
+label{font-size:13px;color:var(--muted)}
+input[type=text],input[type=search]{width:100%;background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:9px 11px;font-size:15px;font-family:inherit}
+textarea,pre{direction:ltr;text-align:left;font-family:Consolas,"Cascadia Mono","Courier New",monospace;font-size:15px;line-height:1.55}
+textarea{flex:1;min-height:200px;width:100%;resize:none;background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:12px;tab-size:2}
+textarea:focus,input:focus,button:focus-visible{outline:2px solid var(--accent);border-color:transparent}
+pre{flex:1;margin:0;overflow:auto;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:14px;white-space:pre;font-family:"Cascadia Mono",Consolas,"Segoe UI Emoji","Courier New",monospace}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-size:14px;cursor:pointer;font-family:inherit}
+button:hover{border-color:var(--accent)}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+button.primary:hover{background:var(--accent2)}
+button.danger{background:var(--danger);border-color:var(--danger);color:#fff}
+button.danger:hover{filter:brightness(1.1)}
+button.ghost-danger:hover{border-color:var(--danger);color:var(--danger)}
+.chk{display:flex;align-items:center;gap:6px;font-size:14px;color:var(--text);cursor:pointer}
+.help{background:var(--bg);border:1px dashed var(--border);border-radius:8px;padding:10px 12px;font-size:13px;color:var(--muted);line-height:1.8}
+.help b{color:var(--text)} .help code{direction:ltr;display:inline-block;background:var(--panel2);padding:0 6px;border-radius:4px;color:var(--text)}
+
+/* ---------- المحرر ---------- */
+#viewEditor{grid-template-columns:1fr 1fr;gap:16px;padding:16px}
+@media(max-width:850px){#viewEditor{grid-template-columns:1fr;overflow:auto}}
+
+/* ---------- الشجرة (مجلدات تتقفل وتتفتح) ---------- */
+.tree{flex:1;min-height:0;overflow:auto;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:14px;direction:ltr;text-align:left;font-family:"Cascadia Mono",Consolas,"Segoe UI Emoji","Courier New",monospace;font-size:15px;line-height:1.55}
+.tree .tr{white-space:pre;width:max-content;min-width:100%;border-radius:4px}
+.tree .tr.fold{cursor:pointer}
+.tree .tr.fold:hover{background:var(--panel2)}
+.tree .tr:focus-visible{outline:2px solid var(--accent)}
+.tree .pfx,.tree .chev{color:var(--muted)}
+.tree .fold .chev{color:var(--accent)}
+.tree .root{font-weight:600}
+.card h2 .hint{font-size:12px;font-weight:400;color:var(--muted);margin-inline-start:10px}
+.row .spacer{flex:1}
+button.small{padding:5px 10px;font-size:13px}
+.empty-editor{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:var(--muted);font-size:16px}
+.empty-editor p{margin:0}
+#viewEditor.is-empty .card{display:none}
+.empty p{margin:0 0 14px}
+
+/* ---------- المكتبة ---------- */
+#viewLibrary{padding:16px 20px;overflow:auto;align-content:start;gap:14px}
+.libbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.libbar input[type=search]{max-width:340px}
+.libbar .spacer{flex:1}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.tcard{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:.15s}
+.tcard:hover{border-color:var(--accent);transform:translateY(-2px)}
+.tcard.current{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.tcard .top{display:flex;align-items:center;gap:8px}
+.tcard .name{font-weight:600;font-size:16px;direction:ltr;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;text-align:right}
+.tag{font-size:11px;background:var(--accent);color:#fff;border-radius:20px;padding:1px 8px}
+.tcard .meta{font-size:12px;color:var(--muted)}
+.tcard pre{flex:none;height:140px;font-size:12.5px;line-height:1.45;padding:10px;overflow:hidden;pointer-events:none;opacity:.9}
+.tcard .acts{display:flex;gap:6px}
+.tcard .acts button{padding:6px 11px;font-size:13px}
+.empty{color:var(--muted);text-align:center;padding:50px 10px;grid-column:1/-1}
+
+/* ---------- نافذة التأكيد ---------- */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:50;padding:16px}
+.overlay.show{display:flex}
+.modal{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:22px;max-width:420px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.modal h3{margin:0 0 8px;font-size:18px}
+.modal p{margin:0 0 18px;color:var(--muted);line-height:1.8;font-size:14px;white-space:pre-line}
+.modal .detail{display:block;direction:ltr;text-align:left;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:8px 10px;margin:-6px 0 16px;font-family:Consolas,"Cascadia Mono","Courier New",monospace;font-size:13px;white-space:pre-wrap;word-break:break-all;max-height:160px;overflow:auto;color:var(--text)}
+.modal .btns{display:flex;gap:8px;justify-content:flex-start}
+
+/* ---------- إشعار ---------- */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--panel2);border:1px solid var(--border);color:var(--text);padding:10px 16px;border-radius:10px;opacity:0;transition:.25s;pointer-events:none;display:flex;gap:14px;align-items:center;z-index:60;font-size:14px}
+.toast.show{opacity:1;pointer-events:auto}
+.toast button{padding:3px 12px;border-color:var(--accent);color:var(--accent)}

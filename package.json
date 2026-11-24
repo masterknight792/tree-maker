@@ -1,0 +1,64 @@
+{
+  "name": "folder-tree-maker",
+  "productName": "Folder Tree Maker",
+  "version": "1.0.0",
+  "description": "Dark-themed app that turns typed folder and file names into a folder tree map with icons, plus a library to keep your trees.",
+  "main": "main.js",
+  "private": true,
+  "author": "Folder Tree Maker",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "check": "node --check main.js && node --check preload.js && node --check scanner.js && node --check creator.js && node --check scripts/after-pack.js",
+    "dist": "electron-builder --win --x64",
+    "dist:safe": "electron-builder --win --x64 -c.win.signAndEditExecutable=false"
+  },
+  "devDependencies": {
+    "@electron/fuses": "latest",
+    "electron": "latest",
+    "electron-builder": "latest"
+  },
+  "build": {
+    "appId": "com.foldertreemaker.app",
+    "productName": "Folder Tree Maker",
+    "copyright": "Folder Tree Maker",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "scanner.js",
+      "creator.js",
+      "package.json",
+      "src/**/*"
+    ],
+    "asar": true,
+    "afterPack": "scripts/after-pack.js",
+    "publish": null,
+    "forceCodeSigning": false,
+    "win": {
+      "icon": "build/icon.ico",
+      "requestedExecutionLevel": "asInvoker",
+      "target": [
+        { "target": "nsis", "arch": ["x64"] },
+        { "target": "portable", "arch": ["x64"] }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Folder Tree Maker",
+      "uninstallDisplayName": "Folder Tree Maker",
+      "deleteAppDataOnUninstall": false,
+      "artifactName": "FolderTreeMaker-Setup-${version}.${ext}"
+    },
+    "portable": {
+      "artifactName": "FolderTreeMaker-Portable-${version}.${ext}"
+    }
+  }
+}
